@@ -1,0 +1,20 @@
+{
+  "name": "webscrape",
+  "version": "1.0.0",
+  "description": "Web app that lets users leave comments on the latest news. News info will be scraped from web using cheerio.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/glenturner/webScrape.git"
+  },
+  "author": "Glen Turner",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/glenturner/webScrape/issues"
+  },
+  "homepage": "https://github.com/glenturner/webScrape#readme"
+}
