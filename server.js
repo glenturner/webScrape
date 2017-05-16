@@ -5,7 +5,7 @@ var request = require('request');
 var cheerio = require('cheerio');
 
 
-app.use(logger('dev'));
+
 app.use(bodyParser.urlencoded({
     extended: false
 }));
