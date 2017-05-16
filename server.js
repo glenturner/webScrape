@@ -1,11 +1,12 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+var logger = require('morgan');
 var request = require('request');
 var cheerio = require('cheerio');
 
 
-
+app.use(logger('dev'));
 app.use(bodyParser.urlencoded({
     extended: false
 }));
@@ -93,7 +94,7 @@ app.post('/articles/:id', function(req, res){
     });
 });
 
-var port = process.env.port || 3000;
+var port = process.env.PORT || 3000;
 
 app.listen(port, function(){
     console.log('App running on port ' + port);
