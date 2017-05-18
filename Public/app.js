@@ -1,11 +1,13 @@
 $('.modal').modal();
 
 
+/*
 $.getJSON('/articles', function(data){
     for(var i=0; i<data.length; i++){
         $('#articles').append('<div class="card blue darken-2"> <span class="card-title condensed thin center" id="' + data[i].title + '">' + data[i].title +  '</span> <p class="condensed thin" data-id="' + data[i]._id + '">' + data[i].body + '</p> <div class="card-action"> <a href="' + data[i].link + '" class="left thin text-black"> Read More </a>  <a id="addNote" data-id="' + data[i]._id + '"class="right thin text-black"> Add Note </a></div></div>  <br>');
     }
 });
+*/
 
 
 $(document).on("click", "li", function() {
