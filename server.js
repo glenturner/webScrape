@@ -42,6 +42,7 @@ app.get('/vice', function(req, res){
             // Testing/Debugging //
             console.log("This is " + result.title);
             result.link = $(this).find("a").attr("href");
+            result.link = $(element).find(".simple-image").find("a").attr("url");
 
             let entry = new Article(result);
             entry.save(function(err, doc){
@@ -55,13 +56,13 @@ app.get('/vice', function(req, res){
     });
     res.send('<a href="/" class="btn thin black lighten-1">View articles </a>');
 });
-// vice news find articles
+// This will get the articles we scraped from the mongoDB
 app.get('/articles', function(req, res){
     Article.find({}, function(err, doc){
         if(err){
-            console.log(err);
+            res.send(err);
         } else{
-            res.json(doc);
+            res.render('index', {article: doc});
         }
     });
 });
