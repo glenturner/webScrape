@@ -54,7 +54,7 @@ app.get('/vice', function(req, res){
             });
         });
     });
-    res.send('<a href="/" class="btn thin black lighten-1">View articles </a>');
+    res.send("<a href='/' class='btn thin black lighten-1'>View articles </a>");
 });
 // This will get the articles we scraped from the mongoDB
 app.get('/articles', function(req, res){
@@ -72,7 +72,7 @@ app.get('/articles/:id', function(req, res){
         .populate('note')
         .exec(function(err, doc){
             if (err){
-                console.log(err);
+                res.send(error);
             } else {
                 res.json(doc);
             }
