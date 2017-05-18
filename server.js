@@ -1,9 +1,15 @@
-var express = require('express');
-var app = express();
-var bodyParser = require('body-parser');
-var logger = require('morgan');
-var request = require('request');
-var cheerio = require('cheerio');
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+const logger = require('morgan');
+const request = require('request');
+const cheerio = require('cheerio');
+//Serve static content for the app from the "public" directory in the application directory.
+
+const exHandlebars = require("express-handlebars");
+
+app.engine("handlebars", exHandlebars({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
 
 
 app.use(logger('dev'));
@@ -14,32 +20,30 @@ app.use(express.static('Public'));
 
 
 // Require models
-var Note = require('./Models/note.js');
-var User = require('./Models/user.js');
-var Article = require('./Models/article.js');
+const Note = require('./Models/note.js');
+const User = require('./Models/user.js');
+const Article = require('./Models/article.js');
 
-var db = require('./Config/connection.js');
+const db = require('./Config/connection.js');
 
 app.get('/', function(req, res){
-    res.send(index.html);
+    res.render('index');
 });
 
 // // request vice
 app.get('/vice', function(req, res){
     request('https://news.vice.com/', function(error, response, html){
-        var $ = cheerio.load(html);
-        $('article').each(function(i, element){
+        let $ = cheerio.load(html);
+        $('.stream-unit').each(function(i, element){
             var result = {};
 
-            result.source = 'Vice News';
-            result.title = $(this).children('h2').children('a').text().trim();
-            result.link = $(this).children('.in-the-news-share-cont').children('div').attr('data-url');
-            result.body = $(this).children('p').text().trim();
-            console.log('result title ', result.title);
-            console.log('result link ', result.link);
-            console.log('result body ', result.body);
+            // Add the text and href of every link, and save them as properties of the result object
+            result.title = $(this).find('.simple-unit .title').text();
+            // Testing/Debugging //
+            console.log("This is " + result.title);
+            result.link = $(this).find("a").attr("href");
 
-            var entry = new Article(result);
+            let entry = new Article(result);
             entry.save(function(err, doc){
                 if(err){
                     console.log(err);
@@ -75,7 +79,7 @@ app.get('/articles/:id', function(req, res){
 });
 
 app.post('/articles/:id', function(req, res){
-    var newNote = new Note(req.body);
+    let newNote = new Note(req.body);
 
     newNote.save(function(err, doc){
         if(err){
@@ -94,7 +98,7 @@ app.post('/articles/:id', function(req, res){
     });
 });
 
-var port = process.env.PORT || 3000;
+let port = process.env.PORT || 3000;
 
 app.listen(port, function(){
     console.log('App running on port ' + port);

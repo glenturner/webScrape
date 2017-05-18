@@ -1,12 +1,12 @@
 $.getJSON('/articles', function(data){
-    for(var i=0; i<data.length; i++){
+    for(let i=0; i<data.length; i++){
         $('#articles').append('<div class="card blue darken-2"> <span class="card-title condensed thin center" id="' + data[i].title + '">' + data[i].title +  '</span> <p class="condensed thin" data-id="' + data[i]._id + '">' + data[i].body + '</p> <div class="card-action"> <a href="' + data[i].link + '" class="left thin text-black"> Read More </a>  <a id="addNote" data-id="' + data[i]._id + '"class="right thin text-black"> Add Note </a></div></div>  <br>');
     }
 });
 
 $(document).on('click', '#addNote', function(){
     $('#notes').empty();
-    var thisId = $(this).attr('data-id');
+    let thisId = $(this).attr('data-id');
 
     $.ajax({
         method: "GET",
@@ -20,7 +20,7 @@ $(document).on('click', '#addNote', function(){
             $('#notes').append('<div class="input-field col s12">');
             $('#notes').append('<textarea class="center thin" id="titleinput" name="title"> </textarea> <label for="titleinput" class="center"> Title </label></div>');
             $('#notes').append('<div class="row"> <textarea id="bodyinput" name="body"></textarea> <label for="bodyinput" class="center">Add Notes</label></div>');
-            $('#notes').append('<div class="row"><button data-id="' + data._id + '" id="savenote" class="waves-effect waves-light btn center-align thin indigo lighten-3">Save Note</button></div>');
+            $('#notes').append('<div class="row"><button data-id="' + data._id + '" id="savenote" class="waves-effect waves-light btn center-align thin blue darken-2">Save Note</button></div>');
 
             if(data.note){
                 $('#titleinput').val(data.note.title);
@@ -30,7 +30,7 @@ $(document).on('click', '#addNote', function(){
 });
 
 $(document).on('click', '#savenote', function(){
-    var thisId = $(this).attr('data-id');
+    let thisId = $(this).attr('data-id');
 
     $.ajax({
         method: "POST",

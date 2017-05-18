@@ -1,13 +1,13 @@
 
-var http = require('http');
-var mongoose = require('mongoose');
+const http = require('http');
+const mongoose = require('mongoose');
 
-var uristring =
+const uristring =
     process.env.MONGOLAB_URI ||
     process.env.MONGOLAB_SILVER_URI ||
     'mongodb://localhost/news_db';
 
-var theport = process.env.PORT || 3000;
+const theport = process.env.PORT || 3000;
 
 // Database configuration - MongoDB
 mongoose.connect(uristring, function(err, res){
@@ -18,6 +18,6 @@ mongoose.connect(uristring, function(err, res){
     }
 });
 
-var db = mongoose.connection;
+const db = mongoose.connection;
 
 module.exports = db;
