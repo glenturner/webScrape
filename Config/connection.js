@@ -2,11 +2,11 @@
 const http = require('http');
 const mongoose = require('mongoose');
 
-const uristring = 'mongodb://heroku_rgfzg47m:592hmdsffcphck84slgc06guab@ds147551.mlab.com:47551/heroku_rgfzg47m';
+let uristring = /*'mongodb://heroku_qcgh736g:5bse42ta0huomkht175oprbcrt@ds027779.mlab.com:27779/heroku_qcgh736g';*/
 
-/*process.env.MONGOLAB_URI ||
+process.env.MONGOLAB_URI ||
 process.env.MONGOLAB_SILVER_URI ||
-'mongodb://localhost/news_db';*/
+'mongodb://localhost/news_db';
 
 const theport = process.env.PORT || 3000;
 
