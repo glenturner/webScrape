@@ -16,15 +16,15 @@ app.use(logger('dev'));
 app.use(bodyParser.urlencoded({
     extended: false
 }));
-app.use(express.static('Public'));
+app.use(express.static('public'));
 
 
 // Require models
-const Note = require('./Models/note.js');
+const Note = require('./models/note.js');
 
-const Article = require('./Models/article.js');
+const Article = require('./models/article.js');
 
-const db = require('./Config/connection.js');
+const db = require('./config/connection.js');
 
 // GET redirect route for homepage //
 app.get('/', function (req, res) {
