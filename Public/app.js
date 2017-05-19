@@ -20,10 +20,10 @@ $(document).on("click", "li", function() {
             $(".modal-footer").html("<button data-id='" + data._id + "' id='savenote' class='modal-action modal-close'>Save Comment</button>");
 
 
-            if (data.comment) {
+            if (data.note) {
                 // display existing comment
-                $("#titleinput").val(data.comment.title);
-                $("#bodyinput").val(data.comment.body);
+                $("#titleinput").val(data.note.title);
+                $("#bodyinput").val(data.note.body);
             }
             $('#modal1').modal('open');
         });
