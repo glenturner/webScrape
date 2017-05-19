@@ -43,10 +43,7 @@ app.get('/scrape', function(req, res){
 
             // Add the text and href of every link, and save them as properties of the result object
             result.title = $(this).find('.simple-unit .title').text();
-            // Testing/Debugging //
-            console.log("This is " + result.title);
             result.link = $(this).find("a").attr("href");
-            result.link = $(element).find(".simple-image").find("a").attr("url");
             let entry = new Article(result);
             entry.save(function(err, doc){
                 if(err){
@@ -57,9 +54,9 @@ app.get('/scrape', function(req, res){
 
             });
         });
-
+        res.redirect("/articles");
     });
-    res.redirect("/articles");
+
 });
 // This will get the articles we scraped from the mongoDB
 app.get('/articles', function(req, res){

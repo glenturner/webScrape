@@ -2,13 +2,9 @@
 const http = require('http');
 const mongoose = require('mongoose');
 
-let uristring = /*'mongodb://heroku_qcgh736g:5bse42ta0huomkht175oprbcrt@ds027779.mlab.com:27779/heroku_qcgh736g';*/
 
-process.env.MONGOLAB_URI ||
-process.env.MONGOLAB_SILVER_URI ||
-'mongodb://localhost/news_db';
+const uristring = process.env.MONGODB_URI || 'mongodb://localhost/news_db';
 
-const theport = process.env.PORT || 3000;
 
 // Database configuration - MongoDB
 mongoose.connect(uristring, function(err, res){
@@ -18,6 +14,8 @@ mongoose.connect(uristring, function(err, res){
         console.log ('Successfully connected to: ' + uristring);
     }
 });
+
+mongoose.Promise = Promise;
 
 const db = mongoose.connection;
 
