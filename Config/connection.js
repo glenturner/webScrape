@@ -3,9 +3,9 @@ const http = require('http');
 const mongoose = require('mongoose');
 
 const uristring =
-    process.env.MONGOLAB_URI ||
-    process.env.MONGOLAB_SILVER_URI ||
-    'mongodb://localhost/news_db';
+process.env.MONGOLAB_URI ||
+process.env.MONGOLAB_SILVER_URI ||
+'mongodb://localhost/news_db';
 
 const theport = process.env.PORT || 3000;
 
