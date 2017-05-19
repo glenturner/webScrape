@@ -21,17 +21,21 @@ app.use(express.static('Public'));
 
 // Require models
 const Note = require('./Models/note.js');
-const User = require('./Models/user.js');
+
 const Article = require('./Models/article.js');
 
 const db = require('./Config/connection.js');
 
-app.get('/', function(req, res){
-    res.render('index');
+// GET redirect route for homepage //
+app.get('/', function (req, res) {
+    // findAll returns all entries for a table when used with no options
+    res.redirect('/articles');
+
 });
 
+
 // // request vice
-app.get('/vice', function(req, res){
+app.get('/scrape', function(req, res){
     request('https://news.vice.com/', function(error, response, html){
         let $ = cheerio.load(html);
         $('.stream-unit').each(function(i, element){
@@ -43,7 +47,6 @@ app.get('/vice', function(req, res){
             console.log("This is " + result.title);
             result.link = $(this).find("a").attr("href");
             result.link = $(element).find(".simple-image").find("a").attr("url");
-
             let entry = new Article(result);
             entry.save(function(err, doc){
                 if(err){
@@ -51,10 +54,12 @@ app.get('/vice', function(req, res){
                 } else {
                     console.log(doc);
                 }
+
             });
         });
+
     });
-    res.send("<a href='/' class='btn thin black lighten-1'>View articles </a>");
+    res.redirect("/articles");
 });
 // This will get the articles we scraped from the mongoDB
 app.get('/articles', function(req, res){
@@ -91,7 +96,7 @@ app.post('/articles/:id', function(req, res){
                     if (err){
                         console.log(err);
                     } else {
-                        res.send(doc);
+                        res.redirect('/articles');
                     }
                 });
 
